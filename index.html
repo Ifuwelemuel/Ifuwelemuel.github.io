@@ -202,6 +202,10 @@ footer{border-top:1px solid var(--border);padding:2rem 8rem;}
   .proj-grid{grid-template-columns:1fr;}
   .hero h1{font-size:32px;}
 }
+
+/* SCROLL FADE IN */
+.fade-up{opacity:0;transform:translateY(28px);transition:opacity 0.65s ease,transform 0.65s ease;}
+.fade-up.visible{opacity:1;transform:translateY(0);}
 </style>
 </head>
 <body>
@@ -241,13 +245,13 @@ footer{border-top:1px solid var(--border);padding:2rem 8rem;}
 <div class="hero" id="hero">
   <div class="hero-left">
     <p class="hero-greeting">Hello,</p>
-    <h1>My name is<br><em>Lemuel</em> Ossai.<br>ML engineer &amp;<br>AI researcher.</h1>
+    <h1>Hi, I'm <em>Lemuel.</em><br>ML engineer &amp;<br>AI researcher.</h1>
     <p class="hero-bio">MSc Automation Control &amp; Robotics at Sheffield Hallam University. I build deep learning systems for underwater navigation, sleep analysis, and real-world AI products. Founder of Debug Tech — the UK&rsquo;s grassroots Physical AI builder community.</p>
     <div class="hero-cta">
       <a href="mailto:lemuelossaiifuwe@gmail.com?subject=CV%20Request&body=Hi%20Lemuel%2C%0A%0AI%27d%20like%20to%20request%20your%20CV." class="btn-primary">Get My CV</a>
       <a href="#contact" class="btn-primary">Contact Me</a>
     </div>
-    <div class="avail"><span class="dot-g"></span>Sheffield, UK &mdash; available from October 2026</div>
+    <div class="avail"><span class="dot-g"></span>Sheffield, UK</div>
   </div>
   <div class="hero-right">
     <div class="hero-photo-wrap">
@@ -267,7 +271,7 @@ footer{border-top:1px solid var(--border);padding:2rem 8rem;}
 
 <!-- PROJECTS -->
 <div class="section-divider"></div>
-<div class="page-section" id="projects">
+<div class="page-section fade-up" id="projects">
   <p class="sec-eyebrow">Open source</p>
   <p class="sec-title">Projects.</p>
   <p class="sec-sub">Production ML systems, applied research tools, and community infrastructure. Pull requests welcome.</p>
@@ -323,7 +327,7 @@ footer{border-top:1px solid var(--border);padding:2rem 8rem;}
 
 <!-- SHOWCASE -->
 <div class="section-divider"></div>
-<div class="page-section" id="showcase">
+<div class="page-section fade-up" id="showcase">
   <p class="sec-eyebrow">Research</p>
   <p class="sec-title">Showcase.</p>
   <div class="sc-outer">
@@ -381,7 +385,7 @@ footer{border-top:1px solid var(--border);padding:2rem 8rem;}
 
 <!-- EXPERIENCE -->
 <div class="section-divider"></div>
-<div class="page-section" id="experience">
+<div class="page-section fade-up" id="experience">
   <p class="sec-eyebrow">Career</p>
   <p class="sec-title">Experience.</p>
   <div class="exp-grid">
@@ -394,7 +398,7 @@ footer{border-top:1px solid var(--border);padding:2rem 8rem;}
 
 <!-- DEBUG TECH -->
 <div class="section-divider"></div>
-<div class="page-section" id="debug-tech">
+<div class="page-section fade-up" id="debug-tech">
   <p class="sec-eyebrow">Community</p>
   <div class="dt-inner">
     <div>
@@ -418,7 +422,7 @@ footer{border-top:1px solid var(--border);padding:2rem 8rem;}
 
 <!-- STACK -->
 <div class="section-divider"></div>
-<div class="page-section" id="stack">
+<div class="page-section fade-up" id="stack">
   <p class="sec-eyebrow">Toolkit</p>
   <p class="sec-title">Tech Stack.</p>
   <p class="sec-sub">A snapshot of what I work with day to day.</p>
@@ -435,7 +439,7 @@ footer{border-top:1px solid var(--border);padding:2rem 8rem;}
 
 <!-- CONTACT -->
 <div class="section-divider"></div>
-<div class="page-section" id="contact">
+<div class="page-section fade-up" id="contact">
   <p class="sec-eyebrow">Get in touch</p>
   <div class="contact-inner">
     <div>
@@ -485,6 +489,20 @@ document.getElementById('sc-prev').addEventListener('click',()=>scGo(scCur-1));
 document.getElementById('sc-next').addEventListener('click',()=>scGo(scCur+1));
 scDots.forEach(d=>d.addEventListener('click',()=>scGo(+d.dataset.idx)));
 window.addEventListener('resize',()=>scGo(scCur));
+</script>
+
+<script>
+// Scroll fade-in
+const fadeEls = document.querySelectorAll('.fade-up');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if(entry.isIntersecting){
+      entry.target.classList.add('visible');
+      observer.unobserve(entry.target);
+    }
+  });
+}, {threshold: 0.08});
+fadeEls.forEach(el => observer.observe(el));
 </script>
 </body>
 </html>
