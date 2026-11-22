@@ -1,0 +1,12 @@
+{
+  "name": "Lemuel Ifuwe",
+  "short_name": "Lemuel Ifuwe",
+  "start_url": "/",
+  "display": "browser",
+  "background_color": "#fbfaf7",
+  "theme_color": "#1d1f22",
+  "icons": [
+    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}
