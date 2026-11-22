@@ -1,0 +1,480 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>Lemuel Ifuwe Recruiter Portfolio</title>
+<meta name="description" content="Lemuel Ifuwe: robotics and AI engineer in Sheffield, UK. Research, projects, experience and skills on one page.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one narrow reading column like a lab homepage. Lists with a thumbnail on the left,
+   a dated timeline for experience, and a small floating nav. Ink-and-paper by day, inkwell by night. */
+:root {
+  --bg: #fbfaf7;
+  --fg: #1d1f22;
+  --muted: #6b6f76;
+  --faint: #9a9ea5;
+  --line: #e4e2dc;
+  --chip: #f1efea;
+  --link: #1f4fbf;
+  --ok: #2f7a45;
+  --art-line: 31, 120, 128;
+  --art-accent: 194, 90, 28;
+  --art-ink: 29, 31, 34;
+  --serif: "Source Serif 4", "Iowan Old Style", Georgia, serif;
+  --mono: "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --bg: #121315; --fg: #e9e7e2; --muted: #a3a29d; --faint: #75756f; --line: #2a2b2e; --chip: #1c1d20; --link: #9db8ff; --ok: #7ccf95; --art-line: 79, 209, 197; --art-accent: 240, 144, 79; --art-ink: 233, 231, 226; color-scheme: dark; } }
+:root[data-theme="dark"] { --bg: #121315; --fg: #e9e7e2; --muted: #a3a29d; --faint: #75756f; --line: #2a2b2e; --chip: #1c1d20; --link: #9db8ff; --ok: #7ccf95; --art-line: 79, 209, 197; --art-accent: 240, 144, 79; --art-ink: 233, 231, 226; color-scheme: dark; }
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 20px; }
+body { margin: 0; position: relative; background: var(--bg); color: var(--fg); font: 17px/1.6 var(--serif); -webkit-font-smoothing: antialiased; }
+.page { max-width: 780px; margin: 0 auto; padding-block: 56px 140px; padding-left: max(18px, env(safe-area-inset-left, 0px)); padding-right: max(18px, env(safe-area-inset-right, 0px)); display: grid; gap: 64px; }
+.page > *, section > * { min-width: 0; }
+.page { position: relative; z-index: 1; }
+.sea { position: absolute; top: 0; left: 0; width: 100%; height: 640px; z-index: 0; pointer-events: none; -webkit-mask-image: linear-gradient(#000 55%, transparent); mask-image: linear-gradient(#000 55%, transparent); }
+h1, h2, h3, p, ul, ol, figure { margin: 0; }
+a { color: var(--link); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+a:hover { text-decoration-thickness: 2px; }
+:focus-visible { outline: 2px solid var(--link); outline-offset: 3px; border-radius: 2px; }
+b { font-weight: 600; }
+em.me { font-style: normal; text-decoration: underline; text-underline-offset: 3px; }
+
+/* header */
+.top { display: grid; grid-template-columns: minmax(0, 1fr) 168px; gap: 20px 36px; align-items: start; }
+.top h1 { font-size: 38px; font-weight: 400; line-height: 1.1; letter-spacing: -0.01em; }
+.tagline { font-style: italic; color: var(--muted); margin-top: 6px; }
+.bio { display: grid; gap: 12px; margin-top: 22px; }
+.portrait { width: 168px; height: 168px; border-radius: 50%; overflow: hidden; background: var(--chip); }
+.portrait img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; }
+.links { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: 8px 18px; align-items: center; padding-top: 16px; border-top: 1px solid var(--line); font-size: 15px; }
+.links a { display: inline-flex; align-items: center; gap: 6px; }
+.links svg { width: 15px; height: 15px; }
+.linkbtn { font: 15px var(--serif); color: var(--link); background: none; border: 0; padding: 0; cursor: pointer; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+.email { font-family: var(--mono); font-size: 13.5px; color: var(--fg); }
+
+/* section heads */
+.sh { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; margin-bottom: 18px; }
+.sh h2 { font-size: 26px; font-weight: 400; line-height: 1.2; }
+.sh p { font-style: italic; color: var(--muted); font-size: 15px; }
+.sh a { font-size: 15px; white-space: nowrap; }
+
+/* entries with a thumbnail */
+.list { list-style: none; padding: 0; border-top: 1px solid var(--line); }
+.entry { display: grid; grid-template-columns: 168px minmax(0, 1fr); gap: 18px; padding: 18px 0; border-bottom: 1px solid var(--line); }
+.thumb { width: 168px; aspect-ratio: 4 / 3; border-radius: 6px; overflow: hidden; background: var(--chip); border: 1px solid var(--line); }
+.thumb img, .thumb svg { width: 100%; height: 100%; object-fit: cover; display: block; }
+.thumb--fig { background: #fff; }
+.thumb--fig img { object-fit: cover; object-position: 50% 0; }
+.entry h3 { font-size: 18px; font-weight: 600; line-height: 1.35; }
+.entry h3 a { color: inherit; text-decoration: none; }
+.entry h3 a:hover { text-decoration: underline; }
+.row { display: flex; justify-content: space-between; gap: 12px; align-items: baseline; }
+.year { font-family: var(--mono); font-size: 12.5px; color: var(--faint); white-space: nowrap; }
+.by { font-size: 15px; color: var(--muted); margin-top: 2px; }
+.venue { font-size: 15px; font-style: italic; color: var(--muted); }
+.desc { font-size: 16px; margin-top: 6px; }
+.stack { font-size: 14px; color: var(--muted); margin-top: 6px; }
+.acts { display: flex; flex-wrap: wrap; gap: 4px 14px; margin-top: 6px; font-size: 15px; }
+.acts span { color: var(--faint); }
+.status { display: inline-block; font: 500 11px/1 var(--mono); letter-spacing: .04em; text-transform: uppercase; font-style: normal; padding: 4px 6px; border-radius: 3px; background: var(--chip); color: var(--muted); vertical-align: 2px; margin-right: 6px; }
+.status.ok { color: var(--ok); }
+
+/* results strip */
+.stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.stats div { padding: 14px 12px 14px 0; }
+.stats div + div { padding-left: 14px; border-left: 1px solid var(--line); }
+.stats b { display: block; font-size: 26px; font-weight: 400; line-height: 1.1; font-variant-numeric: tabular-nums; }
+.stats span { display: block; font-size: 13.5px; color: var(--muted); line-height: 1.4; margin-top: 4px; }
+
+/* timeline */
+.tl { list-style: none; padding: 0; position: relative; }
+.tl::before { content: ""; position: absolute; left: 174px; top: 6px; bottom: 6px; width: 1px; background: var(--line); }
+.tl > li { display: grid; grid-template-columns: 140px 40px minmax(0, 1fr); gap: 0 14px; padding: 10px 0; position: relative; }
+.tl > li::before { content: none; }
+.tl .when { font-family: var(--mono); font-size: 12px; color: var(--faint); text-align: right; white-space: nowrap; padding-top: 11px; line-height: 1.4; font-variant-numeric: tabular-nums; }
+.tl .logo { grid-column: 2; width: 40px; height: 40px; border-radius: 8px; background: #fff; border: 1px solid var(--line); overflow: hidden; display: grid; place-items: center; position: relative; z-index: 1; }
+.tl .logo img { width: 100%; height: 100%; object-fit: contain; }
+.tl .logo i { font: italic 17px var(--serif); color: #1d1f22; }
+.tl .what { grid-column: 3; font-size: 16px; display: grid; gap: 6px; }
+.tl ul { padding-left: 18px; display: grid; gap: 3px; }
+.tl .edu .what p { color: var(--muted); }
+.tl .edu .what b { color: var(--fg); }
+
+/* talks and writing */
+.notes { list-style: none; padding: 0; border-top: 1px solid var(--line); }
+.notes > li { display: grid; grid-template-columns: 92px minmax(0, 1fr); gap: 0 18px; padding: 16px 0; border-bottom: 1px solid var(--line); }
+.notes .when { font-family: var(--mono); font-size: 12.5px; color: var(--faint); padding-top: 4px; }
+.notes p:first-child { font-size: 17px; line-height: 1.4; }
+.notes p:first-child a { color: inherit; text-decoration: none; }
+.notes p:first-child a:hover { text-decoration: underline; }
+
+/* skills */
+.skills { display: grid; grid-template-columns: max-content minmax(0, 1fr); gap: 8px 22px; font-size: 16px; margin: 0; }
+.skills dt { font-weight: 600; }
+.skills dd { margin: 0; color: var(--muted); }
+
+/* floating nav */
+.dock { position: fixed; left: 50%; transform: translateX(-50%); bottom: calc(14px + env(safe-area-inset-bottom, 0px)); z-index: 20; display: flex; align-items: center; gap: 2px; padding: 5px; border-radius: 999px; background: color-mix(in srgb, var(--bg) 84%, transparent); border: 1px solid var(--line); box-shadow: 0 8px 28px -12px rgb(0 0 0 / .35); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); font-size: 14px; max-width: calc(100% - 24px); overflow-x: auto; scrollbar-width: none; }
+.dock a { color: var(--muted); text-decoration: none; padding: 6px 12px; border-radius: 999px; white-space: nowrap; }
+.dock a:hover, .dock a.on { color: var(--fg); background: var(--chip); }
+
+.foot { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; font-size: 14px; color: var(--muted); border-top: 1px solid var(--line); padding-top: 16px; }
+.foot .linkbtn { font-size: 14px; }
+
+@media (max-width: 640px) {
+  body { font-size: 16px; }
+  .page { gap: 48px; padding-block: 32px 120px; }
+  .top { grid-template-columns: minmax(0, 1fr) 96px; }
+  .top h1 { font-size: 30px; }
+  .portrait { width: 96px; height: 96px; }
+  .bio { grid-column: 1 / -1; margin-top: 0; }
+  .entry { grid-template-columns: 96px minmax(0, 1fr); gap: 14px; }
+  .thumb { width: 96px; }
+  .row { flex-direction: column; gap: 2px; }
+  .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .stats div:nth-child(3) { border-left: 0; padding-left: 0; }
+  .stats div:nth-child(n+3) { border-top: 1px solid var(--line); }
+  .tl::before { left: 20px; }
+  .tl > li { grid-template-columns: 40px minmax(0, 1fr); gap: 2px 14px; }
+  .tl > li::before { display: none; }
+  .tl .when { grid-column: 2; grid-row: 1; text-align: left; padding: 0; white-space: normal; }
+  .tl .logo { grid-column: 1; grid-row: 1 / span 2; }
+  .tl .what { grid-column: 2; }
+  .notes > li { grid-template-columns: 1fr; gap: 4px; }
+  .skills { grid-template-columns: 1fr; gap: 2px; }
+  .skills dd { margin-bottom: 10px; }
+  .dock a { padding: 6px 10px; }
+}
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+</style>
+</head>
+<body>
+
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-in" viewBox="0 0 24 24"><path fill="currentColor" d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.850 3.370-1.850 3.601 0 4.267 2.370 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></symbol>
+  <symbol id="i-gh" viewBox="0 0 24 24"><path fill="currentColor" d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.070 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></symbol>
+  <symbol id="i-sc" viewBox="0 0 24 24"><path fill="currentColor" d="M5.242 13.769L0 9.5 12 0l12 9.5-5.242 4.269C17.548 11.249 14.978 9.5 12 9.5c-2.977 0-5.548 1.748-6.758 4.269zM12 10a7 7 0 1 0 0 14 7 7 0 0 0 0-14z"/></symbol>
+  <symbol id="i-md" viewBox="0 0 24 24"><path fill="currentColor" d="M13.54 12a6.8 6.8 0 0 1-6.77 6.82A6.8 6.8 0 0 1 0 12a6.8 6.8 0 0 1 6.77-6.82A6.8 6.8 0 0 1 13.54 12zm7.42 0c0 3.54-1.51 6.42-3.38 6.42-1.87 0-3.39-2.88-3.39-6.42s1.52-6.42 3.39-6.42 3.38 2.88 3.38 6.42M24 12c0 3.17-.53 5.75-1.19 5.750-.66 0-1.19-2.58-1.19-5.75s.53-5.75 1.19-5.75C23.47 6.25 24 8.83 24 12z"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" d="M3 5h18v14H3zM3 6l9 7 9-7"/></symbol>
+</svg>
+
+<canvas class="sea" aria-hidden="true"></canvas>
+<main class="page" id="top">
+  <header class="top">
+    <div>
+      <h1>Lemuel Ifuwe</h1>
+    </div>
+    <figure class="portrait"><img src="img/lemuel.jpg" alt="Lemuel Ifuwe" width="400" height="500"></figure>
+    <div class="bio">
+      <p>I'm a robotics and AI engineer in Sheffield. At <a href="https://www.shu.ac.uk/" target="_blank" rel="noopener">Sheffield Hallam University</a> I build deep-learning models for sleep and audio as an AI researcher, and I lead the electronics and <b>ROS 2</b> software for a low-cost autonomous underwater vehicle. On its first recorded autonomous run it covered <b>36.8 m to within 3 m</b> of its target, then stopped itself and surfaced, on <b>£777</b> of parts. In March 2026 I was a speaker for the <a href="#talks">Africa Deep Tech Community</a>, where I took apart how to architect a real-world AUV, from edge computing to ROS 2 on the vehicle.</p>
+      <p>I finished an MSc in Automation, Control and Robotics Engineering in 2026. Before that I studied Information and Communication Engineering at <a href="https://covenantuniversity.edu.ng/" target="_blank" rel="noopener">Covenant University</a>, designed PCBs at NodeX iHub, led an automation team at Huawei, and co-founded an ed-tech startup that piloted with more than 1,000 users.</p>
+    </div>
+    <nav class="links" aria-label="Contact and profiles">
+      <a href="mailto:lemuelossaiifuwe@gmail.com"><svg aria-hidden="true"><use href="#i-mail"/></svg><span class="email" id="email">lemuelossaiifuwe@gmail.com</span></a>
+      <button type="button" class="linkbtn" id="copy-email">copy</button>
+      <a href="https://www.linkedin.com/in/lemuel-ifuwe-6812b8230" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-in"/></svg>LinkedIn</a>
+      <a href="https://github.com/Ifuwelemuel" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-gh"/></svg>GitHub</a>
+      <a href="https://scholar.google.com/citations?user=KJxcrmEAAAAJ&amp;hl=en" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-sc"/></svg>Scholar</a>
+      <a href="https://medium.com/@lemuelossaiifuwe" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-md"/></svg>Medium</a>
+    </nav>
+  </header>
+
+  <section id="research" aria-labelledby="h-research">
+    <div class="sh"><div><h2 id="h-research">Research</h2><p>Papers, published and on the way</p></div><a href="https://scholar.google.com/citations?user=KJxcrmEAAAAJ&amp;hl=en" target="_blank" rel="noopener">Google Scholar</a></div>
+    <ol class="list">
+      <li class="entry">
+        <div class="thumb"><img src="img/nfc-device.jpg" alt="The NFC payment device opened up, showing its battery, LCD, NFC reader and circuit board" loading="lazy"></div>
+        <div>
+          <h3><a href="https://ieeexplore.ieee.org/document/10379212" target="_blank" rel="noopener">Development of a Hybrid Near Field Communication Payment System for a Closed Community</a></h3>
+          <p class="by">E. C. Anyiam, A. U. Adoghe, <em class="me">I. L. Ossai</em>, I. Samuel, K. Okokpujie</p>
+          <p class="venue"><span class="status ok">Published</span>IEEE ICMEAS, 2023</p>
+          <p class="desc">A tap-to-pay device that clears payments offline on the card and syncs over Wi-Fi. I built the hardware (PCB, ATmega328P, ESP-12E, PN532 NFC reader), the firmware and the apps.</p>
+          <p class="acts"><a href="https://ieeexplore.ieee.org/document/10379212" target="_blank" rel="noopener">Paper</a></p>
+        </div>
+      </li>
+      <li class="entry">
+        <div class="thumb"><img src="img/auv-build.jpg" alt="The new AUV's hull sections on the bench with the electronics wired between them" loading="lazy"></div>
+        <div>
+          <h3>A Safety-First ROS 2 Architecture for Waypoint Navigation on a Low-Cost AUV</h3>
+          <p class="by"><em class="me">L. O. Ifuwe</em> and collaborators</p>
+          <p class="venue"><span class="status">In preparation</span>Target: OCEANS 2027</p>
+          <p class="desc">One arbitrated command path, staleness rejection, a heartbeat watchdog and a fail-to-surface safe state. Validated in open water; now moving to a new vehicle design.</p>
+          <p class="acts"><a href="https://github.com/Ifuwelemuel/auv_stack" target="_blank" rel="noopener">Code</a></p>
+        </div>
+      </li>
+      <li class="entry">
+        <div class="thumb thumb--fig"><img src="img/sleep-arch-blurred.jpg" alt="Model architecture diagram, blurred until the paper is published" loading="lazy"></div>
+        <div>
+          <h3>Real-Time-Capable Sleep Staging from Wrist Signals with a Dual-Resolution Convolutional Network</h3>
+          <p class="by"><em class="me">L. O. Ifuwe</em>, H. Razaghi</p>
+          <p class="venue"><span class="status">In preparation</span>Sheffield Hallam University</p>
+          <p class="desc">A ~130k-parameter CNN that pairs a 30-minute window with a coarse summary of the night so far. Run fully in real time it reaches κ 0.648 (3-class) on MESA, above the strongest published offline systems on the same wrist inputs.</p>
+        </div>
+      </li>
+      <li class="entry">
+        <div class="thumb"><img src="img/auv-msc.jpg" alt="The MSc AUV, a grey torpedo hull with fins, on the workbench" loading="lazy"></div>
+        <div>
+          <div class="row"><h3>Electronics and ROS 2 Software Architecture for Waypoint Navigation on a Low-Cost, Torpedo-Form AUV</h3><span class="year">2026</span></div>
+          <p class="by"><em class="me">L. O. Ifuwe</em></p>
+          <p class="venue"><span class="status ok">Completed</span>MSc dissertation, Sheffield Hallam University</p>
+          <p class="desc">Heading held to 3.5° mean absolute error and depth to 0.600 ± 0.011 m over an 1,103 s autonomous mission.</p>
+        </div>
+      </li>
+    </ol>
+  </section>
+
+  <section id="projects" aria-labelledby="h-projects">
+    <div class="sh"><div><h2 id="h-projects">Projects</h2><p>Robots, models and pipelines</p></div><a href="https://github.com/Ifuwelemuel?tab=repositories" target="_blank" rel="noopener">GitHub</a></div>
+    <ol class="list">
+      <li class="entry">
+        <div class="thumb"><img src="img/auv-new.jpg" alt="The new AUV hull: black 3D-printed sections with a red nose cone" loading="lazy" style="object-position:50% 70%"></div>
+        <div>
+          <div class="row"><h3><a href="https://github.com/Ifuwelemuel/auv_stack" target="_blank" rel="noopener">AUV waypoint navigation stack</a></h3><span class="year">2026 –</span></div>
+          <p class="desc">ROS 2 packages for a single-thruster, fin-steered AUV: safety supervisor, command mixer, LOS guidance, depth and heading PID, sensor drivers. Every tunable lives in YAML, so the same code runs on the bench and in the water.</p>
+          <p class="stack">ROS 2 · Python · Raspberry Pi 4 · Pixhawk · PCA9685 · Blue Robotics T200</p>
+          <p class="acts"><a href="https://github.com/Ifuwelemuel/auv_stack" target="_blank" rel="noopener">Code</a></p>
+        </div>
+      </li>
+      <li class="entry">
+        <div class="thumb"><img src="img/distress-spectrogram.jpg" alt="Mel-spectrogram of a shouted call for help, boxed and labelled HELP, with its waveform underneath" loading="lazy"></div>
+        <div>
+          <div class="row"><h3><a href="https://github.com/Ifuwelemuel/Audio-Distress-Call-Detection" target="_blank" rel="noopener">Audio distress-call detection</a></h3><span class="year">2026</span></div>
+          <p class="desc">A CNN that classifies a short clip as help or not help. Self-recorded clips become 128×128 mel-spectrograms, augmented five ways (840 → 4,200 samples). 99.5% accuracy and F1 0.995 on 840 test clips.</p>
+          <p class="stack">Python · Keras · librosa · CNN</p>
+          <p class="acts"><a href="https://github.com/Ifuwelemuel/Audio-Distress-Call-Detection" target="_blank" rel="noopener">Code</a></p>
+        </div>
+      </li>
+      <li class="entry">
+        <div class="thumb" aria-hidden="true">
+          <svg viewBox="0 0 168 126" preserveAspectRatio="xMidYMid slice"><rect width="168" height="126" fill="#0f1a24"/><rect x="14" y="20" width="92" height="22" rx="6" fill="#26323f"/><rect x="22" y="28" width="60" height="5" rx="2" fill="#9aa6b2"/><rect x="62" y="52" width="92" height="30" rx="6" fill="#2a4a86"/><rect x="70" y="60" width="70" height="4" rx="2" fill="#dbe5ff"/><rect x="70" y="69" width="52" height="4" rx="2" fill="#dbe5ff"/><rect x="14" y="92" width="26" height="18" rx="3" fill="#f0904f"/><rect x="44" y="92" width="26" height="18" rx="3" fill="#3a4654"/><rect x="74" y="92" width="26" height="18" rx="3" fill="#3a4654"/></svg>
+        </div>
+        <div>
+          <h3><a href="https://github.com/Ifuwelemuel/support-assistant" target="_blank" rel="noopener">Support assistant</a></h3>
+          <p class="desc">A ticket classifier plus a retrieval-augmented answerer, built end to end as an ML engineering project on Azure.</p>
+          <p class="stack">Python · RAG · Azure · Jupyter</p>
+          <p class="acts"><a href="https://github.com/Ifuwelemuel/support-assistant" target="_blank" rel="noopener">Code</a></p>
+        </div>
+      </li>
+      <li class="entry">
+        <div class="thumb" aria-hidden="true">
+          <svg viewBox="0 0 168 126" preserveAspectRatio="xMidYMid slice"><rect width="168" height="126" fill="#0f1a24"/><path d="M14 22H154M14 104H154" stroke="#26323f"/><path d="M14 30 C50 32 80 40 104 58 S140 92 154 104" fill="none" stroke="#6f93d8" stroke-width="2"/><path d="M14 36 C48 30 70 50 96 54 S132 90 150 100" fill="none" stroke="#f0904f" stroke-width="1.5" stroke-dasharray="4 3"/><line x1="104" y1="22" x2="104" y2="104" stroke="#9aa6b2" stroke-dasharray="2 3"/><text x="108" y="34" fill="#9aa6b2" font-family="monospace" font-size="8">RUL</text></svg>
+        </div>
+        <div>
+          <h3><a href="https://github.com/Ifuwelemuel/turbofan-rul" target="_blank" rel="noopener">Turbofan remaining useful life</a></h3>
+          <p class="desc">Predicting how many cycles a turbofan engine has left from its sensor history.</p>
+          <p class="stack">Python · predictive maintenance · time series</p>
+          <p class="acts"><a href="https://github.com/Ifuwelemuel/turbofan-rul" target="_blank" rel="noopener">Code</a></p>
+        </div>
+      </li>
+      <li class="entry">
+        <div class="thumb"><img src="img/transformer.jpg" alt="Transformer architecture diagram (Vaswani et al., 2017)" loading="lazy" style="object-position:50% 40%"></div>
+        <div>
+          <div class="row"><h3>LectureMate AI</h3><span class="year">2023 – 2024</span></div>
+          <p class="desc">Co-founded an ed-tech platform with AI quiz generation and note summaries, piloted by more than 1,000 users. My NLP tagging pipeline cut manual labelling by 70% and raised quiz success by 22%.</p>
+          <p class="stack">Python · NLP · Transformers · product</p>
+          <p class="acts"><span>Code not public</span></p>
+        </div>
+      </li>
+      <li class="entry">
+        <div class="thumb"><img src="img/tower.jpg" alt="Engineers in safety harnesses climbing a telecom tower to service its radio units" loading="lazy" style="object-position:50% 22%"></div>
+        <div>
+          <div class="row"><h3>Cell-tower anomaly detection</h3><span class="year">2024</span></div>
+          <p class="desc">Isolation Forest plus rules on MTN tower operations data at Huawei: 30% fewer false positives, inside an automation pipeline that made decommission analysis 45% faster.</p>
+          <p class="stack">Python · scikit-learn · anomaly detection</p>
+          <p class="acts"><span>Proprietary</span></p>
+        </div>
+      </li>
+    </ol>
+  </section>
+
+  <section id="talks" aria-labelledby="h-talks">
+    <div class="sh"><div><h2 id="h-talks">Talks &amp; writing</h2><p>Explaining what I build and what I read</p></div><a href="https://www.linkedin.com/in/lemuel-ifuwe-6812b8230/recent-activity/all/" target="_blank" rel="noopener">All posts</a></div>
+    <ol class="list">
+      <li class="entry">
+        <div class="thumb"><img src="img/talk-adtc.jpg" alt="Event poster: Edge Robotics in Deep Waters, an Africa Deep Tech Community session with Lemuel Ifuwe" loading="lazy" style="object-position:50% 30%"></div>
+        <div>
+          <div class="row"><h3><a href="https://www.linkedin.com/posts/lemuel-ifuwe-6812b8230_there-is-still-time-join-me-tomorrow-with-share-7438222256096350208-wbTc/" target="_blank" rel="noopener">Edge Robotics in Deep Waters: Architecting Real-World Autonomous Underwater Vehicles</a></h3><span class="year">14 Mar 2026</span></div>
+          <p class="venue"><span class="status">Talk</span>Africa Deep Tech Community, Expert-Led Frontier Session, online</p>
+          <p class="desc">A technical teardown of building a real AUV: splitting work between a single-board computer and microcontrollers, ROS 2 node and topic design for real hardware, and the sim-to-real constraints of marine robotics.</p>
+          <p class="acts"><a href="https://www.linkedin.com/posts/lemuel-ifuwe-6812b8230_there-is-still-time-join-me-tomorrow-with-share-7438222256096350208-wbTc/" target="_blank" rel="noopener">Session</a></p>
+        </div>
+      </li>
+      <li class="entry">
+        <div class="thumb"><img src="img/post-wearables.jpg" alt="A person checking a smartwatch on their wrist" loading="lazy"></div>
+        <div>
+          <div class="row"><h3><a href="https://www.linkedin.com/posts/lemuel-ifuwe-6812b8230_did-apple-health-lie-in-the-high-stakes-share-7431105901056462849-f9sF/" target="_blank" rel="noopener">Did Apple Health lie?</a></h3><span class="year">21 Feb 2026</span></div>
+          <p class="venue"><span class="status">Post</span>LinkedIn</p>
+          <p class="desc">Wearables are strong at sleep versus wake and weaker at staging. A medtech model should be judged on whether it is fit for its intended use, not on whether it is perfect.</p>
+          <p class="acts"><a href="https://www.linkedin.com/posts/lemuel-ifuwe-6812b8230_did-apple-health-lie-in-the-high-stakes-share-7431105901056462849-f9sF/" target="_blank" rel="noopener">Read</a></p>
+        </div>
+      </li>
+    </ol>
+  </section>
+
+  <section id="experience" aria-labelledby="h-exp">
+    <div class="sh"><div><h2 id="h-exp">Experience</h2><p>Work and study, newest first</p></div><a href="https://www.linkedin.com/in/lemuel-ifuwe-6812b8230" target="_blank" rel="noopener">LinkedIn</a></div>
+    <ol class="tl">
+      <li>
+        <span class="when">Mar 2026 – Present</span>
+        <span class="logo"><img src="img/logo-shu.jpg" alt="" loading="lazy"></span>
+        <div class="what">
+          <p><b>AI Researcher</b> and <b>Autonomous Systems Engineer</b> (volunteer research), Sheffield Hallam University.</p>
+          <ul>
+            <li>Sleep staging from clinical EEG/EOG through to wrist wearables; my real-time model beats the published offline systems on MESA.</li>
+            <li>Audio distress detection with spectrograms and CNNs, for older people living alone.</li>
+            <li>Lead on AUV electronics and ROS 2 software: power, actuation, safety supervisor, waypoint navigation.</li>
+          </ul>
+        </div>
+      </li>
+      <li class="edu">
+        <span class="when">Sep 2025 – Sep 2026</span>
+        <span class="logo"><img src="img/logo-shu.jpg" alt="" loading="lazy"></span>
+        <div class="what"><p><b>MSc Automation, Control and Robotics Engineering</b>, Sheffield Hallam University. Dissertation on the AUV's electronics and ROS 2 architecture.</p></div>
+      </li>
+      <li>
+        <span class="when">May 2025 – Sep 2025</span>
+        <span class="logo"><img src="img/logo-rif.jpg" alt="" loading="lazy"></span>
+        <div class="what"><p><b>Data Scientist</b>, Royal Iwere Foundation (remote). A Python reporting pipeline that cut manual processing by <b>40%</b>, and Looker Studio dashboards used in grant applications.</p></div>
+      </li>
+      <li>
+        <span class="when">Nov 2023 – Nov 2024</span>
+        <span class="logo"><img src="img/logo-huawei.jpg" alt="" loading="lazy"></span>
+        <div class="what"><p><b>Systems Integration Consultant</b>, Huawei, Lagos. Led the team behind an automation pipeline for MTN cell-tower decommission analysis (<b>45%</b> faster delivery) and built anomaly detection that cut false positives by <b>30%</b>.</p></div>
+      </li>
+      <li>
+        <span class="when">Apr 2023 – Mar 2024</span>
+        <span class="logo"><i>Lm</i></span>
+        <div class="what"><p><b>Co-founder and Startup Engineer</b>, LectureMate AI. AI quizzes and summaries piloted by <b>1,000+</b> users; NLP tagging that removed <b>70%</b> of manual labelling.</p></div>
+      </li>
+      <li>
+        <span class="when">Jul 2022 – Apr 2023</span>
+        <span class="logo"><img src="img/logo-nodex.jpg" alt="" loading="lazy"></span>
+        <div class="what"><p><b>IT Consultant, data science and embedded systems</b>, NodeX iHub. Designed analogue and digital circuits and PCBs, and took client products from design to production.</p></div>
+      </li>
+      <li class="edu">
+        <span class="when">Jun 2022 – Jul 2023</span>
+        <span class="logo"><i>S</i></span>
+        <div class="what"><p><b>Machine Learning for Production Specialization</b>, Stanford University (online).</p></div>
+      </li>
+      <li class="edu">
+        <span class="when">2018 – 2023</span>
+        <span class="logo"><img src="img/logo-covenant.jpg" alt="" loading="lazy"></span>
+        <div class="what"><p><b>BEng Information and Communication Engineering</b>, Covenant University. My final-year project became the IEEE NFC payment paper.</p></div>
+      </li>
+    </ol>
+  </section>
+
+  <section id="skills" aria-labelledby="h-skills">
+    <div class="sh"><div><h2 id="h-skills">Skills</h2><p>What I reach for</p></div></div>
+    <dl class="skills">
+      <dt>Machine learning</dt><dd>TensorFlow / Keras · PyTorch · scikit-learn · CNNs · NLP · RAG · anomaly detection</dd>
+      <dt>Signals</dt><dd>EEG / EOG · actigraphy and heart rate · audio and mel-spectrograms · time series</dd>
+      <dt>Robotics</dt><dd>ROS 2 · LOS guidance · PID control · ArduPilot / ArduSub · MAVLink · GPS navigation</dd>
+      <dt>Hardware</dt><dd>Raspberry Pi 4 · Jetson Orin Nano Super · Pixhawk · ATmega328P · ESP8266 · PCB design · I²C, PWM, UART</dd>
+      <dt>Languages</dt><dd>Python · MATLAB · C/C++ for embedded</dd>
+      <dt>MLOps and data</dt><dd>MLflow · Azure · Git · Looker Studio</dd>
+    </dl>
+  </section>
+
+  <footer class="foot"><span>© 2026 Lemuel Ifuwe · Sheffield, UK</span><span><button type="button" class="linkbtn" id="copy-all">Copy page as plain text</button> · <a href="#top">Back to top</a></span></footer>
+</main>
+
+<nav class="dock" aria-label="Sections">
+  <a href="#top">Home</a><a href="#research">Research</a><a href="#projects">Projects</a><a href="#talks">Talks</a><a href="#experience">Experience</a><a href="#skills">Skills</a>
+</nav>
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Person","name":"Lemuel Ossai Ifuwe","jobTitle":"Robotics and AI Engineer","email":"mailto:lemuelossaiifuwe@gmail.com","address":{"@type":"PostalAddress","addressLocality":"Sheffield","addressCountry":"GB"},"alumniOf":[{"@type":"CollegeOrUniversity","name":"Sheffield Hallam University"},{"@type":"CollegeOrUniversity","name":"Covenant University"}],"sameAs":["https://www.linkedin.com/in/lemuel-ifuwe-6812b8230","https://github.com/Ifuwelemuel","https://scholar.google.com/citations?user=KJxcrmEAAAAJ","https://medium.com/@lemuelossaiifuwe"],"knowsAbout":["ROS 2","Deep learning","Autonomous underwater vehicles","Sleep staging","Embedded systems","MLOps"]}
+</script>
+<script>
+function copyText(text, btn, label) {
+  const done = () => { btn.textContent = 'copied'; setTimeout(() => { btn.textContent = label; }, 1600); };
+  const fallback = () => {
+    const ta = document.createElement('textarea'); ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
+    document.body.appendChild(ta); ta.select();
+    let ok = false; try { ok = document.execCommand('copy'); } catch (e) {}
+    ta.remove(); if (ok) done(); else btn.textContent = 'select and copy by hand';
+  };
+  if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(done, fallback); else fallback();
+}
+document.getElementById('copy-email').addEventListener('click', e => copyText(document.getElementById('email').textContent, e.currentTarget, 'copy'));
+document.getElementById('copy-all').addEventListener('click', e => {
+  const page = document.querySelector('.page').cloneNode(true);
+  page.querySelectorAll('button, svg, .thumb, .portrait, .logo').forEach(n => n.remove());
+  const tmp = document.createElement('div'); tmp.style.position = 'fixed'; tmp.style.left = '-9999px'; tmp.style.width = '780px'; tmp.appendChild(page); document.body.appendChild(tmp);
+  const text = page.innerText.replace(/\n{3,}/g, '\n\n').trim(); tmp.remove();
+  copyText(text, e.currentTarget, 'Copy page as plain text');
+});
+const dockLinks = [...document.querySelectorAll('.dock a')];
+const io = new IntersectionObserver(es => es.forEach(en => { if (en.isIntersecting) dockLinks.forEach(a => a.classList.toggle('on', a.getAttribute('href') === '#' + en.target.id)); }), { rootMargin: '-40% 0px -55% 0px' });
+['top', 'research', 'projects', 'talks', 'experience', 'skills'].forEach(id => { const el = document.getElementById(id); if (el) io.observe(el); });
+/* sea-floor contours with a vehicle on a waypoint track, as on the aesthetic site */
+(() => {
+  const cv = document.querySelector('.sea'); if (!cv) return;
+  const ctx = cv.getContext('2d');
+  const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let W = 0, H = 0, col = {}, vis = true;
+  const css = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+  const rgba = (c, a) => `rgba(${col[c]},${a})`;
+  function readCols() { col = { line: css('--art-line'), accent: css('--art-accent'), ink: css('--art-ink') }; }
+  function size() { const d = Math.min(devicePixelRatio || 1, 2); W = cv.clientWidth; H = cv.clientHeight; cv.width = Math.round(W * d); cv.height = Math.round(H * d); ctx.setTransform(d, 0, 0, d, 0, 0); }
+  function field(x, y, t) {
+    return Math.sin(x * 0.0062 + t * 0.05) * Math.cos(y * 0.0081 - t * 0.04)
+      + 0.6 * Math.sin((x + y) * 0.0043 + 1.3 - t * 0.03)
+      + 0.35 * Math.cos(x * 0.013 - y * 0.009 + t * 0.07)
+      + 0.25 * Math.sin(Math.hypot(x - 900, y - 300) * 0.011 - t * 0.06);
+  }
+  function contours(t) {
+    const step = 16, levels = 10, cols = Math.ceil(W / step) + 1, rows = Math.ceil(H / step) + 1, v = new Float32Array(cols * rows);
+    for (let j = 0; j < rows; j++) for (let i = 0; i < cols; i++) v[j * cols + i] = field(i * step, j * step, t);
+    const dark = col.ink.startsWith('233');
+    for (let l = 0; l < levels; l++) {
+      const th = -1.8 + (3.6 * (l + 0.5)) / levels, major = l % 3 === 1;
+      ctx.strokeStyle = rgba('line', (major ? 0.3 : 0.13) * (dark ? 1 : 0.85)); ctx.lineWidth = major ? 1.1 : 0.8; ctx.beginPath();
+      for (let j = 0; j < rows - 1; j++) for (let i = 0; i < cols - 1; i++) {
+        const a = v[j * cols + i], b = v[j * cols + i + 1], c = v[(j + 1) * cols + i + 1], d = v[(j + 1) * cols + i];
+        const idx = (a > th) | ((b > th) << 1) | ((c > th) << 2) | ((d > th) << 3); if (idx === 0 || idx === 15) continue;
+        const x = i * step, y = j * step, f = (p, q) => (th - p) / (q - p);
+        const T = [x + step * f(a, b), y], Rr = [x + step, y + step * f(b, c)], B = [x + step * f(d, c), y + step], L = [x, y + step * f(a, d)];
+        const sg = (p, q) => { ctx.moveTo(p[0], p[1]); ctx.lineTo(q[0], q[1]); };
+        switch (idx) { case 1: case 14: sg(L, T); break; case 2: case 13: sg(T, Rr); break; case 3: case 12: sg(L, Rr); break; case 4: case 11: sg(Rr, B); break; case 6: case 9: sg(T, B); break; case 7: case 8: sg(L, B); break; case 5: sg(L, T); sg(Rr, B); break; case 10: sg(T, Rr); sg(L, B); break; }
+      }
+      ctx.stroke();
+    }
+  }
+  const along = (p, u) => { const n = p.length - 1, k = Math.min(n - 1, Math.floor(u * n)), f = u * n - k; return [p[k][0] + (p[k + 1][0] - p[k][0]) * f, p[k][1] + (p[k + 1][1] - p[k][1]) * f]; };
+  function draw(t) {
+    ctx.clearRect(0, 0, W, H);
+    contours(t);
+    const wide = W > 1100;
+    const pts = (wide ? [[.79, .62], [.84, .3], [.9, .5], [.94, .2], [.97, .4]] : [[.06, .03], [.3, .012], [.55, .032], [.78, .012], [.95, .03]]).map(p => [p[0] * W, p[1] * H]);
+    ctx.strokeStyle = rgba('accent', .7); ctx.lineWidth = 1.3; ctx.setLineDash([6, 6]); ctx.beginPath(); pts.forEach((p, i) => i ? ctx.lineTo(p[0], p[1]) : ctx.moveTo(p[0], p[1])); ctx.stroke(); ctx.setLineDash([]); ctx.lineWidth = 1;
+    ctx.font = '500 10px "IBM Plex Mono", monospace';
+    pts.forEach((p, i) => { ctx.strokeStyle = rgba('accent', .85); ctx.beginPath(); ctx.arc(p[0], p[1], 5, 0, 7); ctx.stroke(); if (wide && p[0] + 34 < W) { ctx.fillStyle = rgba('ink', .45); ctx.fillText('WP' + (i + 1), p[0] + 9, p[1] - 8); } });
+    const v = along(pts, (t * 0.03) % 1), R = wide ? 110 : 60, a = (t * 0.6) % (Math.PI * 2);
+    if (ctx.createConicGradient) { const g = ctx.createConicGradient(a - 0.9, v[0], v[1]); g.addColorStop(0, rgba('line', 0)); g.addColorStop(0.14, rgba('line', 0.14)); g.addColorStop(0.145, rgba('line', 0)); g.addColorStop(1, rgba('line', 0)); ctx.fillStyle = g; ctx.beginPath(); ctx.arc(v[0], v[1], R, 0, 7); ctx.fill(); }
+    ctx.strokeStyle = rgba('line', .45); ctx.beginPath(); ctx.moveTo(v[0], v[1]); ctx.lineTo(v[0] + Math.cos(a) * R, v[1] + Math.sin(a) * R); ctx.stroke();
+    const g2 = ctx.createRadialGradient(v[0], v[1], 0, v[0], v[1], 18); g2.addColorStop(0, rgba('accent', .7)); g2.addColorStop(1, rgba('accent', 0));
+    ctx.fillStyle = g2; ctx.beginPath(); ctx.arc(v[0], v[1], 18, 0, 7); ctx.fill();
+    ctx.fillStyle = rgba('accent', 1); ctx.beginPath(); ctx.arc(v[0], v[1], 3, 0, 7); ctx.fill();
+  }
+  readCols(); size(); draw(6);
+  addEventListener('resize', () => { size(); draw(performance.now() / 1000 + 6); });
+  matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => { readCols(); draw(performance.now() / 1000 + 6); });
+  new MutationObserver(() => { readCols(); draw(performance.now() / 1000 + 6); }).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+  if (REDUCED) return;
+  new IntersectionObserver(es => { vis = es[0].isIntersecting; }).observe(cv);
+  const loop = now => { if (vis) draw(now / 1000 + 6); requestAnimationFrame(loop); };
+  requestAnimationFrame(loop);
+})();
+
+</script>
+
+</body>
+</html>
