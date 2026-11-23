@@ -13,6 +13,7 @@ document.addEventListener('click', function (e) {
   if (!a || !window.goatcounter || !window.goatcounter.count) return;
   var href = a.getAttribute('href') || '';
   var isMail = href.indexOf('mailto:') === 0;
+  if (/\.pdf($|\?)/i.test(href)) { window.goatcounter.count({ path: 'download-cv', title: 'Download CV (PDF)', event: true }); return; }
   if (!isMail && (href.charAt(0) === '#' || a.hostname === location.hostname)) return;
   window.goatcounter.count({
     path: isMail ? 'click-email' : 'click-' + a.hostname.replace(/^www\./, '') + a.pathname.replace(/\/$/, ''),
@@ -96,6 +97,9 @@ em.me { font-style: normal; text-decoration: underline; text-underline-offset: 3
 .links { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: 8px 18px; align-items: center; padding-top: 16px; border-top: 1px solid var(--line); font-size: 15px; }
 .links a { display: inline-flex; align-items: center; gap: 6px; }
 .links svg { width: 15px; height: 15px; }
+.links .cvbtn { margin-left: auto; padding: 6px 14px; border-radius: 999px; background: var(--fg); color: var(--bg); text-decoration: none; font-weight: 600; transition: transform .15s, opacity .15s; }
+.links .cvbtn:hover { opacity: .88; transform: translateY(-1px); }
+.links .cvbtn span { font: 500 11px var(--mono); opacity: .7; }
 .linkbtn { font: 15px var(--serif); color: var(--link); background: none; border: 0; padding: 0; cursor: pointer; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
 .email { font-family: var(--mono); font-size: 13.5px; color: var(--fg); }
 
@@ -183,6 +187,7 @@ em.me { font-style: normal; text-decoration: underline; text-underline-offset: 3
   .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .stats div:nth-child(3) { border-left: 0; padding-left: 0; }
   .stats div:nth-child(n+3) { border-top: 1px solid var(--line); }
+  .links .cvbtn { margin-left: 0; }
   .tl::before { left: 20px; }
   .tl > li { grid-template-columns: 40px minmax(0, 1fr); gap: 2px 14px; }
   .tl > li::before { display: none; }
@@ -205,6 +210,7 @@ em.me { font-style: normal; text-decoration: underline; text-underline-offset: 3
   <symbol id="i-gh" viewBox="0 0 24 24"><path fill="currentColor" d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.070 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></symbol>
   <symbol id="i-sc" viewBox="0 0 24 24"><path fill="currentColor" d="M5.242 13.769L0 9.5 12 0l12 9.5-5.242 4.269C17.548 11.249 14.978 9.5 12 9.5c-2.977 0-5.548 1.748-6.758 4.269zM12 10a7 7 0 1 0 0 14 7 7 0 0 0 0-14z"/></symbol>
   <symbol id="i-md" viewBox="0 0 24 24"><path fill="currentColor" d="M13.54 12a6.8 6.8 0 0 1-6.77 6.82A6.8 6.8 0 0 1 0 12a6.8 6.8 0 0 1 6.77-6.82A6.8 6.8 0 0 1 13.54 12zm7.42 0c0 3.54-1.51 6.42-3.38 6.42-1.87 0-3.39-2.88-3.39-6.42s1.52-6.42 3.39-6.42 3.38 2.88 3.38 6.42M24 12c0 3.17-.53 5.75-1.19 5.750-.66 0-1.19-2.58-1.19-5.75s.53-5.75 1.19-5.75C23.47 6.25 24 8.83 24 12z"/></symbol>
+  <symbol id="i-dl" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M12 3v12M7 10l5 5 5-5M4 19h16"/></symbol>
   <symbol id="i-mail" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" d="M3 5h18v14H3zM3 6l9 7 9-7"/></symbol>
 </svg>
 
@@ -226,6 +232,7 @@ em.me { font-style: normal; text-decoration: underline; text-underline-offset: 3
       <a href="https://github.com/Ifuwelemuel" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-gh"/></svg>GitHub</a>
       <a href="https://scholar.google.com/citations?user=KJxcrmEAAAAJ&amp;hl=en" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-sc"/></svg>Scholar</a>
       <a href="https://medium.com/@lemuelossaiifuwe" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-md"/></svg>Medium</a>
+      <a class="cvbtn" href="Lemuel_Ifuwe_CV.pdf" download="Lemuel_Ifuwe_CV.pdf" type="application/pdf"><svg aria-hidden="true"><use href="#i-dl"/></svg>Download CV <span>PDF</span></a>
     </nav>
   </header>
 
