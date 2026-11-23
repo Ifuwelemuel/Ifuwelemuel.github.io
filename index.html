@@ -3,6 +3,24 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- GoatCounter: connect early and load in <head> so a visit is counted as soon as the page opens -->
+<link rel="preconnect" href="https://gc.zgo.at" crossorigin>
+<link rel="preconnect" href="https://lemuelifuwe.goatcounter.com" crossorigin>
+<script data-goatcounter="https://lemuelifuwe.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+<script>
+document.addEventListener('click', function (e) {
+  var a = e.target.closest('a');
+  if (!a || !window.goatcounter || !window.goatcounter.count) return;
+  var href = a.getAttribute('href') || '';
+  var isMail = href.indexOf('mailto:') === 0;
+  if (!isMail && (href.charAt(0) === '#' || a.hostname === location.hostname)) return;
+  window.goatcounter.count({
+    path: isMail ? 'click-email' : 'click-' + a.hostname.replace(/^www\./, '') + a.pathname.replace(/\/$/, ''),
+    title: (a.textContent || '').trim().slice(0, 80),
+    event: true
+  });
+});
+</script>
 <title>Lemuel Ifuwe – AI Engineer | Robotics, ROS 2, AUVs, MLOps</title>
 <meta name="description" content="Lemuel Ifuwe is an AI engineer with expertise in robotics: ROS 2, autonomous underwater vehicles, deep learning for sleep staging, embedded systems and MLOps. Research, projects and experience.">
 <meta name="author" content="Lemuel Ifuwe">
@@ -670,21 +688,6 @@ const io = new IntersectionObserver(es => es.forEach(en => { if (en.isIntersecti
 
 </script>
 
-<!-- GoatCounter: page views + clicks on outside links and email -->
-<script data-goatcounter="https://lemuelifuwe.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
-<script>
-document.addEventListener('click', function (e) {
-  var a = e.target.closest('a');
-  if (!a || !window.goatcounter || !window.goatcounter.count) return;
-  var href = a.getAttribute('href') || '';
-  var isMail = href.indexOf('mailto:') === 0;
-  if (!isMail && (href.charAt(0) === '#' || a.hostname === location.hostname)) return;
-  window.goatcounter.count({
-    path: isMail ? 'click-email' : 'click-' + a.hostname.replace(/^www\./, '') + a.pathname.replace(/\/$/, ''),
-    title: (a.textContent || '').trim().slice(0, 80),
-    event: true
-  });
-});
-</script>
+<noscript><img src="https://lemuelifuwe.goatcounter.com/count?p=/noscript" alt="" width="1" height="1" style="position:absolute"></noscript>
 </body>
 </html>
