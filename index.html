@@ -670,5 +670,21 @@ const io = new IntersectionObserver(es => es.forEach(en => { if (en.isIntersecti
 
 </script>
 
+<!-- GoatCounter: page views + clicks on outside links and email -->
+<script data-goatcounter="https://lemuelifuwe.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+<script>
+document.addEventListener('click', function (e) {
+  var a = e.target.closest('a');
+  if (!a || !window.goatcounter || !window.goatcounter.count) return;
+  var href = a.getAttribute('href') || '';
+  var isMail = href.indexOf('mailto:') === 0;
+  if (!isMail && (href.charAt(0) === '#' || a.hostname === location.hostname)) return;
+  window.goatcounter.count({
+    path: isMail ? 'click-email' : 'click-' + a.hostname.replace(/^www\./, '') + a.pathname.replace(/\/$/, ''),
+    title: (a.textContent || '').trim().slice(0, 80),
+    event: true
+  });
+});
+</script>
 </body>
 </html>
